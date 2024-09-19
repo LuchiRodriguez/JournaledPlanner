@@ -1,18 +1,21 @@
 import { Link } from "react-router-dom";
 import logo from "../App/img/logo.svg";
+import { NavBarStyled } from "../App/Styles";
 
 const NavBar = () => {
   return (
-    <nav>
+    <NavBarStyled>
       <ul>
-        <Link to="/home">
+        <Link to="/">
           <img src={logo} alt="" />
         </Link>
-        <Link to="/areas">Areas</Link>
-        <Link to="/reminders">Reminders</Link>
-        <Link to="/profile">Profile</Link>
+        <div>
+          <Link to="/areas">Areas</Link>
+          <Link to="/reminders">Reminders</Link>
+          <Link to="/profile">Profile</Link>
+        </div>
       </ul>
-    </nav>
+    </NavBarStyled>
   );
 };
 

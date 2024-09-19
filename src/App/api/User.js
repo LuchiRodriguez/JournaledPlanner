@@ -13,7 +13,6 @@ export const createUser = async (obj) => {
 
 // LOGIN
 export const postUser = async (email, password) => {
-  console.log("11111111111111");
   try {
     const response = await axios.post(
       "http://localhost:8080/journaled-planner/login",
@@ -27,7 +26,7 @@ export const postUser = async (email, password) => {
     );
     setAuth(email, password);
     if (response.status === 200) {
-      console.log("Login exitoso:", response.data);
+      console.log(response.data);
     } else {
       console.error("Error de autenticación:", response.data);
     }

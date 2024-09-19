@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom/client";
-import React from "react";
 import App from "./App/App.jsx";
 import { GlobalStyle } from "./App/Styles";
+import UserProvider from "./App/UserProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <UserProvider>
     <GlobalStyle />
     <App />
-  </React.StrictMode>
+  </UserProvider>
 );

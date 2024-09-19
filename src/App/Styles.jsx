@@ -3,14 +3,15 @@ import styled, { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
   *{
     font-family: "Roboto", sans-serif;
-  }
-  body{
     margin: 0;
     padding: 0;
   }
+    body{
+      max-height: 100vh;
+    }
 `;
 
-export const SignInContainer = styled.div`
+export const LandingContainer = styled.div`
   display: grid;
   min-height: 100vh;
 
@@ -112,7 +113,7 @@ export const SignInContainer = styled.div`
   }
 `;
 
-export const SignInForm = styled.form`
+export const LandingForm = styled.form`
   margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -215,6 +216,106 @@ export const LogIn = styled.div`
     }
     button:active {
       color: #21b6a8;
+    }
+  }
+`;
+
+export const NavBarStyled = styled.nav`
+  margin: auto;
+  width: 95%;
+  border-bottom: 2px solid #a3ebb1;
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 0;
+    div {
+      display: flex;
+      gap: 30px;
+      a {
+        text-decoration: none;
+        color: #21b6a8;
+        font-weight: bold;
+        font-size: larger;
+      }
+    }
+  }
+  img {
+    height: 60px;
+  }
+`;
+
+export const StyledHome = styled.div`
+  ul {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+    color: #116530;
+    li {
+      cursor: pointer;
+    }
+  }
+  div.view {
+    display: none;
+    margin-top: 10px;
+  }
+  div.active {
+    width: 90%;
+    margin: auto;
+    display: block;
+    h1 {
+      margin: 10px 0;
+      color: #116530;
+    }
+  }
+`;
+
+export const Day = styled.div`
+  section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    height: 100%;
+  }
+  article {
+    color: #18a558;
+  }
+  div.section {
+    display: none;
+    padding: 20px;
+  }
+  div.active {
+    display: block;
+    p {
+      height: 22px;
+      border-bottom: 1px solid #a3ebb1;
+      input {
+        width: 90%;
+        border: none;
+        outline: none;
+        color: #1d1d1b;
+      }
+    }
+    textarea {
+      width: 95%;
+      height: 500px;
+      resize: none;
+      outline: none;
+      padding: 20px;
+      border-radius: 10px;
+      line-height: 20px;
+    }
+  }
+  aside {
+    height: 530px;
+    padding: 20px;
+    background-color: #a3ebb1;
+    border-radius: 10px;
+    ul {
+      display: flex;
+      flex-direction: column;
     }
   }
 `;

@@ -1,11 +1,13 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import aside from "../App/img/aside.png";
 import logo from "../App/img/logo.svg";
-import { SignInContainer, SignInForm, Wrapper, LogIn } from "../App/Styles";
+import { LandingContainer, LandingForm, Wrapper, LogIn } from "../App/Styles";
 import { createUser, postUser } from "../App/api/User";
 import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../App/UserProvider";
 
-const SignIn = () => {
+const Landing = () => {
   const navigate = useNavigate();
   const [login, setLogin] = useState(false);
   const [firstname, setFirstname] = useState();
@@ -13,28 +15,44 @@ const SignIn = () => {
   const [email, setEmail] = useState();
   const [birthday, setBirthday] = useState();
   const [password, setPassword] = useState();
+  const [user, setUser] = useUserContext();
 
+  const handleRegister = async () => {
+    try {
+      await createUser({
+        firstname,
+        lastname,
+        email,
+        birthday,
+        password,
+      });
+      localStorage.setItem("user", JSON.stringify({ email, password }));
+      navigate("/");
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+    }
+  };
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
-      await postUser(email, password);
-      console.log("Login exitoso");
-      navigate("/home");
+      await postUser(email, password).then((data) => {
+        setUser({ ...data.data, email, password });
+      });
+      navigate("/");
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
   };
 
   return (
-    <SignInContainer>
+    <LandingContainer>
       <aside>
         <img alt="" src={aside} />
       </aside>
 
       <main>
         <div>
-          <img src={logo} alt="" />
+          <img src={logo} alt="" onClick={() => navigate("/")} />
 
           <h1>Welcome to Journaled Planner!</h1>
 
@@ -43,7 +61,7 @@ const SignIn = () => {
             progress while journaling your thoughts and experiences.
           </p>
 
-          <SignInForm action="#">
+          <LandingForm action="#">
             <div>
               <label htmlFor="FirstName">First Name</label>
 
@@ -120,7 +138,7 @@ const SignIn = () => {
                 required
               />
             </div>
-          </SignInForm>
+          </LandingForm>
           <section>
             {/* <div>
               <label htmlFor="MarketingAccept">
@@ -146,20 +164,7 @@ const SignIn = () => {
             </div> */}
 
             <div>
-              <button
-                onClick={async () => {
-                  await createUser({
-                    firstname,
-                    lastname,
-                    email,
-                    birthday,
-                    password,
-                  });
-                  navigate("/home");
-                }}
-              >
-                Create an account
-              </button>
+              <button onClick={handleRegister}>Create an account</button>
 
               <p>
                 Already have an account?
@@ -191,8 +196,8 @@ const SignIn = () => {
           <button type="submit">Log in</button>
         </form>
       </LogIn>
-    </SignInContainer>
+    </LandingContainer>
   );
 };
 
-export default SignIn;
+export default Landing;
