@@ -74,7 +74,9 @@ export const SignInContainer = styled.div`
       line-height: 1.25rem;
       color: rgb(107 114 128);
     }
-    a {
+    span {
+      cursor: pointer;
+      text-decoration: underline;
       color: rgb(55 65 81);
     }
     button {

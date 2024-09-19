@@ -14,6 +14,18 @@ const SignIn = () => {
   const [birthday, setBirthday] = useState();
   const [password, setPassword] = useState();
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      await postUser(email, password);
+      console.log("Login exitoso");
+      navigate("/home");
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+    }
+  };
+
   return (
     <SignInContainer>
       <aside>
@@ -40,6 +52,7 @@ const SignIn = () => {
                 id="FirstName"
                 name="first_name"
                 required
+                autoComplete="firstname"
                 onChange={(e) => setFirstname(e.target.value)}
               />
             </div>
@@ -52,6 +65,7 @@ const SignIn = () => {
                 id="LastName"
                 name="last_name"
                 required
+                autoComplete="lastname"
                 onChange={(e) => setLastname(e.target.value)}
               />
             </div>
@@ -64,6 +78,7 @@ const SignIn = () => {
                 id="Email"
                 name="email"
                 required
+                autoComplete="email"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -76,6 +91,7 @@ const SignIn = () => {
                 id="Birthday"
                 name="Birthday"
                 required
+                autoComplete="birthday"
                 onChange={(e) => setBirthday(e.target.value)}
               />
             </div>
@@ -148,10 +164,7 @@ const SignIn = () => {
               <p>
                 Already have an account?
                 <br />
-                <a href="#" onClick={() => setLogin(true)}>
-                  Log in
-                </a>
-                .
+                <span onClick={() => setLogin(true)}>Log in</span>.
               </p>
             </div>
           </section>
@@ -159,12 +172,13 @@ const SignIn = () => {
       </main>
       <Wrapper $login={login} onClick={() => setLogin(false)} />
       <LogIn $login={login}>
-        <form>
+        <form onSubmit={handleLogin}>
           <label htmlFor="EmailLogin"> Email </label>
           <input
             type="email"
             id="EmailLogin"
             name="email"
+            autoComplete="email"
             onChange={(e) => setEmail(e.target.value)}
           />
           <label htmlFor="PasswordLogin"> Password </label>
@@ -174,14 +188,7 @@ const SignIn = () => {
             name="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button
-            onClick={async () => {
-              await postUser(email, password);
-              navigate("/home");
-            }}
-          >
-            Log in
-          </button>
+          <button type="submit">Log in</button>
         </form>
       </LogIn>
     </SignInContainer>
