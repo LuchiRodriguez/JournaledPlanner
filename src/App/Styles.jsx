@@ -247,75 +247,102 @@ export const NavBarStyled = styled.nav`
 `;
 
 export const StyledHome = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin: 20px auto;
+  width: 95%;
+  .rbc-calendar {
+    height: 640px;
+  }
   ul {
-    margin: 10px 0;
     display: flex;
-    justify-content: center;
-    gap: 30px;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
     list-style: none;
-    color: #116530;
     li {
       cursor: pointer;
     }
   }
-  div.view {
-    display: none;
-    margin-top: 10px;
+  .rbc-btn-group button {
+    font-size: medium;
+    border: none;
+    color: #116530;
   }
-  div.active {
-    width: 90%;
-    margin: auto;
-    display: block;
-    h1 {
-      margin: 10px 0;
-      color: #116530;
-    }
-  }
-`;
 
-export const Day = styled.div`
-  section {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    height: 100%;
-  }
-  article {
+  .rbc-btn-group button:hover {
+    background-color: white;
     color: #18a558;
+    cursor: pointer;
   }
-  div.section {
-    display: none;
-    padding: 20px;
+  .rbc-btn-group button:active {
+    box-shadow: none;
+    background-color: white;
+    color: #18a558;
+    cursor: pointer;
   }
-  div.active {
-    display: block;
-    p {
-      height: 22px;
-      border-bottom: 1px solid #a3ebb1;
-      input {
-        width: 90%;
-        border: none;
-        outline: none;
-        color: #1d1d1b;
-      }
-    }
-    textarea {
-      width: 95%;
-      height: 500px;
-      resize: none;
-      outline: none;
-      padding: 20px;
-      border-radius: 10px;
-      line-height: 20px;
-    }
+  .rbc-btn-group button:target {
+    box-shadow: none;
+    background-color: white;
+    color: #18a558;
+    cursor: pointer;
   }
-  aside {
-    height: 530px;
-    padding: 20px;
-    background-color: #a3ebb1;
+  .rbc-btn-group button.rbc-active {
+    background-color: white;
+    box-shadow: none;
+    color: #18a558;
+    text-decoration: underline;
+  }
+  .rbc-toolbar .rbc-toolbar-label {
+    color: #116530;
+    font-size: x-large;
+  }
+  .rbc-time-view {
     border-radius: 10px;
-    ul {
-      display: flex;
-      flex-direction: column;
-    }
+    border: 1px solid #18a558;
+  }
+  .rbc-today {
+    background-color: #a3ebb1;
+  }
+  .rbc-event {
+    background-color: #116530;
+  }
+  .rbc-time-content {
+    border-top: 2px solid #18a558;
+  }
+  .rbc-timeslot-group {
+    border-bottom: 1px solid #18a558;
+  }
+  .rbc-header {
+    color: #116530;
+    border-bottom: 1px solid #18a558;
+  }
+  .rbc-label {
+    color: #116530;
+  }
+  .rbc-button-link {
+    color: #116530;
+  }
+  .rbc-time-header.rbc-overflowing {
+    border-right: 1px solid #18a558;
+  }
+  .rbc-time-header-content {
+    border-left: 1px solid #18a558;
+  }
+  .rbc-header + .rbc-header {
+    border-left: 1px solid #18a558;
+  }
+  .rbc-time-content > * + * > * {
+    border-left: 1px solid #18a558;
+  }
+  .rbc-day-bg + .rbc-day-bg {
+    border-left: 1px solid #18a558;
+  }
+  .rbc-month-view {
+    border-radius: 10px;
+    border: 1px solid #18a558;
+  }
+  .rbc-off-range-bg {
+    background: #a3ebb1;
   }
 `;

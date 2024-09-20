@@ -1,128 +1,69 @@
 import NavBar from "../components/NavBar";
-import { StyledHome, Day } from "../App/Styles";
-import { useState } from "react";
-import DayHook from "../App/DayHook";
+import { StyledHome } from "../App/Styles";
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import format from "date-fns/format";
+import parse from "date-fns/parse";
+import startOfWeek from "date-fns/startOfWeek";
+import getDay from "date-fns/getDay";
+// import { es as esLocale } from "date-fns/locale";
+import { enUS as enLocale } from "date-fns/locale";
 
 const Home = () => {
-  const { today } = DayHook();
-  const [view, setView] = useState("day");
-  const [section, setSection] = useState("schedule");
-  const handleView = (target) => {
-    setView(target);
+  const eventsList = [
+    {
+      start: new Date(2024, 8, 20),
+      end: new Date(2024, 8, 21),
+      title: "Event 1",
+    },
+  ];
+
+  const getLocale = () => {
+    const language = navigator.language;
+    if (language.startsWith("enUS")) {
+      return enLocale;
+    } else {
+      // return esLocale;
+    }
   };
-  const handleSection = (target) => {
-    setSection(target);
+
+  const locale = getLocale();
+
+  const localizer = dateFnsLocalizer({
+    format: (date, formattingString) =>
+      format(date, formattingString, { locale }),
+    parse,
+    startOfWeek,
+    getDay,
+    locales: { en: enLocale },
+  });
+  const capitalize = (str) => {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+  const formats = {
+    dayHeaderFormat: (date) => {
+      const formatString =
+        locale === enLocale ? "EEEE, d 'de' MMMM" : "EEEE, MMMM d";
+      return capitalize(format(date, formatString, { locale }));
+    },
   };
   return (
     <>
       <NavBar />
       <StyledHome>
+        <Calendar
+          localizer={localizer}
+          events={eventsList}
+          startAccessor="start"
+          endAccessor="end"
+          views={["day", "week", "month"]}
+          defaultView="day"
+          formats={formats}
+        />
         <ul>
-          <li onClick={() => handleView("day")}>DAY</li>
-          <li onClick={() => handleView("week")}>WEEK</li>
-          <li onClick={() => handleView("month")}>MONTH</li>
+          <li>Calendar</li>
+          <li>Journal</li>
         </ul>
-
-        <Day className={`view ${view === "day" ? "active" : ""}`}>
-          <h1>{today}</h1>
-          <section>
-            <article>
-              <div
-                className={`section ${section === "schedule" ? "active" : ""}`}
-              >
-                <p>
-                  00: <input type="text" name="" id="" />{" "}
-                </p>
-                <p>
-                  01: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  02: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  03: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  04: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  05: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  06: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  07: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  08: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  09: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  10: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  11: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  12: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  13: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  14: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  15: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  16: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  17: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  18: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  19: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  20: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  21: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  22: <input type="text" name="" id="" />
-                </p>
-                <p>
-                  23: <input type="text" name="" id="" />
-                </p>
-              </div>
-              <div
-                className={`section ${section === "journal" ? "active" : ""}`}
-              >
-                <textarea name="" id=""></textarea>
-              </div>
-            </article>
-            <aside>
-              <ul>
-                <li onClick={() => handleSection("schedule")}>Schedule</li>
-                <li onClick={() => handleSection("journal")}>Journal</li>
-              </ul>
-            </aside>
-          </section>
-        </Day>
-        <div className={`view ${view === "week" ? "active" : ""}`}>
-          <h1>WEEK</h1>
-        </div>
-        <div className={`view ${view === "month" ? "active" : ""}`}>
-          <h1>MONTH</h1>
-        </div>
       </StyledHome>
     </>
   );
