@@ -248,7 +248,7 @@ export const NavBarStyled = styled.nav`
 
 export const StyledHome = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 8fr 1fr;
   margin: 20px auto;
   width: 95%;
   .rbc-calendar {
@@ -264,6 +264,9 @@ export const StyledHome = styled.div`
       cursor: pointer;
     }
   }
+`;
+
+export const CalendarStyled = styled.div`
   .rbc-btn-group button {
     font-size: medium;
     border: none;
@@ -342,7 +345,51 @@ export const StyledHome = styled.div`
     border-radius: 10px;
     border: 1px solid #18a558;
   }
-  .rbc-off-range-bg {
-    background: #a3ebb1;
+  .rbc-events-container {
+    margin: 0;
+  }
+`;
+
+export const CreateEvent = styled.div`
+  display: ${({ $showform }) => ($showform ? "block" : "none")};
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(0 0 0 / 0.5);
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    width: 200px;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    color: #116530;
+    background-color: white;
+    border: 2px solid #116530;
+    border-radius: 10px;
+    button {
+      padding: 1px 6px;
+      border-radius: 10px;
+      border: none;
+      background-color: #116530;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      font-weight: 500;
+      color: white;
+      align-self: end;
+    }
+    input {
+      padding: 5px;
+      border: none;
+      border-bottom: 1px solid #116530;
+      outline: none;
+    }
+    div {
+      align-self: center;
+    }
   }
 `;
